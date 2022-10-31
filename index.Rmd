@@ -18,8 +18,16 @@ Moreover, I am proficient in using spreadsheets and other Microsoft office progr
 
 ### Follow the links below to see some of my work
 
-* [work](content/script.html)
+* [Analyzing World Population Data](content/script.html)
 
 ### Resume
 
 * [Resume](content/Profile.pdf)
+
+# Contact Me
+
+[Twitter](https://twitter.com/mwangi_george)
+
+[LinkedIn](https://www.linkedin.com/in/georgemwangikenya)
+
+[Mail](mailto:mwangigeorge648@gmail.com)

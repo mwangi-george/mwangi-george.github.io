@@ -8,15 +8,19 @@ output:
     theme: cerulean
 ---
 
-
 ```{r include = FALSE}
 # load important packages
 # tidyverse for data importation, wrangling and visualization
 # janitor for data cleaning 
 # lubridate for dealing with dates and 
 # ggthemes for plotting themes
-pacman::p_load(tidyverse, janitor, lubridate, ggthemes)
+pacman::p_load(tidyverse, janitor, lubridate, ggthemes, knitr)
 ```
+
+```{r echo=FALSE}
+include_graphics("D:\\website\\mwangi-george.github.io\\graphics\\globe.jpg")
+```
+
 
 ## Loading datasets
 We will be working with two data sets, one that contains the population figures for all countries, and another one that contains additional information about each country such as income group, region, and special notes. These data sets can be download [here](https://www.datacamp.com/workspace/datasets/dataset-r-world-population).
@@ -32,13 +36,10 @@ pop_data <- read_csv("datasets/pop_data.csv",
 ```
 
 ## Wrangling the data
-It is critical that we comprehend the structure, data types, and shape of the data we'll be working with. We will execute some code in this part to aid in our data exploration.
+It is critical that we comprehend the structure, data types, and shape of the data we'll be working with. 
 ```{r}
-# print the structure of pop_data
-glimpse(pop_data)
+head(pop_data)
 ```
-
-From the above output, we make some important insights about our data:
 
 * The data contains 266 rows and 64 columns. Each country has a single row with multiple columns to hold the population figures of various years; also called the wide data format. 
 
