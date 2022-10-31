@@ -1,0 +1,25 @@
+---
+title: "Main Page"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    theme: cerulean
+---
+![](content/pic1.jpg)
+
+### Profile
+
+First off, I recently finished my undergraduate studies from Kenyatta University's where I took Economics and Statistics and attained First Class Honors. I learned essential skills in this course, like conducting statistical analysis, making the most optimal decisions, and creating practical economic models. In addition, I am now enrolled in Coursera's online data analyst certification program.
+
+Second, I am proficient in the R programming language, which I use to cleanse, manipulate, and analyze various data sets. I'm able to produce reproducible HTML reports that may be published on a website by using Markdown tools in R programming. The ability to manipulate, access, and update data stored in a variety of relational database management systems, including Microsoft SQL Server and SQLite, is another skill I possess.  Kindly see out the code I've written in these potent programming languages on my GitHub page.
+
+Moreover, I am proficient in using spreadsheets and other Microsoft office programs. With the use of these abilities, I can perform analysis that is timely, accurate, and dependable and use it to draw conclusions, make projections, and influence decisions. These abilities make me confident that I can contribute to a data analytics team.
+
+### Follow the links below to see some of my work
+
+* [work](content/script.html)
+
+### Resume
+
+* [Resume](content/Profile.pdf)

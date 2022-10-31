@@ -1,0 +1,8 @@
+navbar:
+  title: Welcome to George's Profile!
+  left:
+    - text: Main page that links to files
+    - href: content.html
+output:
+  html_document
+    

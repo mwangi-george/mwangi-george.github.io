@@ -1,0 +1,10 @@
+---
+title: "Main page"
+output: 
+  html_document:
+    df_print: paged
+---
+
+This is where I link to other files that are in the main directory
+
+Visit my [work](content/script.html)
