@@ -1,0 +1,397 @@
+---
+title: "Analyzing World Population Data"
+date: "Last edited `r format(Sys.Date(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    theme: cerulean
+---
+
+```{r include = FALSE}
+# load important packages
+# tidyverse for data importation, wrangling and visualization
+# janitor for data cleaning 
+# lubridate for dealing with dates and 
+# ggthemes for plotting themes
+pacman::p_load(tidyverse, janitor, lubridate, ggthemes, knitr)
+```
+
+```{r echo=FALSE}
+include_graphics("D:\\website\\mwangi-george.github.io\\graphics\\globe.jpg")
+```
+
+
+## Loading datasets
+We will be working with two data sets, one that contains the population figures for all countries, and another one that contains additional information about each country such as income group, region, and special notes. These data sets can be download [here](https://www.datacamp.com/workspace/datasets/dataset-r-world-population).
+```{r}
+# load data files
+country_info <- read_csv("datasets/country_info.csv", 
+                         show_col_types = F) %>% 
+                            # clean variable names 
+                            clean_names()
+
+pop_data <- read_csv("datasets/pop_data.csv",
+                     show_col_types = F)
+```
+
+## Wrangling the data
+It is critical that we comprehend the structure, data types, and shape of the data we'll be working with. 
+```{r}
+head(pop_data)
+```
+
+* The data contains 266 rows and 64 columns. Each country has a single row with multiple columns to hold the population figures of various years; also called the wide data format. 
+
+* We definitely want to change the naming of the variables to remove the backticks.
+
+* Additionally, we will transform the data into the long format, remove unnecessary columns, check whether there are NA's.
+
+```{r}
+# remove unnecessary columns
+pop_data <- pop_data %>% 
+  select(-c("Indicator Name", "Indicator Code"))
+
+# transform to long format
+pop_data <- pop_data %>%
+  # change to the long format
+  pivot_longer(
+    # choose the columns to transform
+    cols = -c("Country Code"),
+    names_to = "year", 
+    values_to = "population") %>% 
+  # rename country code column
+  rename("country_code" = "Country Code")
+
+# print the first 3 rows 
+pop_data %>% 
+  slice_head(n = 3)
+
+# check for rows with incomplete cases
+pop_data %>% 
+  filter(!complete.cases(.))
+```
+
+There exists records with incomplete data, however, based on the questions we hope to answer([README](https://github.com/mwangi-george/Analyzing-World-Population-Data/tree/main)), these missing values might not affect our analysis, therefore, no reason to remove them. 
+
+Let's now shift our focus to the other table, `country_info`.
+```{r}
+glimpse(country_info)
+```
+
+We can make some important observations from the code output above:
+
+* Unlike the pop_data table which contained 266 rows, country_info contains 265 rows, indicating that there exists a record in one table and not in the other table.
+
+* Some observations are coded as `null` instead of `NA`. 
+
+* Also, we will rename the `table_name` column to `country_name`.
+
+Let's start by identifying the records in the pop_data table that are not in the country_info table.
+```{r}
+not_in_pop_data <- pop_data %>% 
+  # view rows not in country_info table 
+  anti_join(country_info, by = "country_code")
+
+unique(not_in_pop_data$country_code)
+unique(not_in_pop_data$population)
+```
+
+We discover that the demographic data for a nation with the code `INX` is missing for all years. As a result, we can take it off the table.
+```{r}
+pop_data <- pop_data %>% 
+  # filter INX
+  filter(country_code != "INX")
+```
+
+We also need to change nulls to NA's in the table country_info.
+```{r}
+# replace nulls with NA in the whole data frame
+country_info <- data.frame(lapply(country_info,
+                                  function(x)
+                                    {
+                                    gsub(x,
+                                         pattern = "null",
+                                         replacement = NA)
+                                    }
+                                  )
+                           ) 
+
+
+head(country_info)
+```
+
+* Renaming columns
+```{r}
+# rename table_name column
+country_info <- country_info %>% 
+  rename("country_name" = "table_name")
+
+# print column names
+names(country_info)
+```
+Last but not least, it would be a good idea to utilize a single data frame for all of our analysis.
+
+We'll join the two tables together using the `country_code` column before choosing our key variables.
+```{r}
+world_pop <- pop_data %>%
+  # join the two tables on key columns
+  inner_join(country_info, 
+             by = "country_code") %>% 
+  # select variables of interest
+  select(country_name, 
+         region, 
+         income_group, 
+         year, 
+         population)
+
+# view a few rows
+world_pop %>% 
+  head(3)
+
+# check for correct data types 
+glimpse(world_pop)
+```
+
+Let's change the variables `country_name`, `region`, `income_group` into factors and `year` into numeric. 
+```{r}
+world_pop <- world_pop %>% 
+  mutate(country_name = as.factor(country_name),
+         region = as.factor(region),
+         income_group = as.factor(income_group),
+         year = as.numeric(year))
+```
+
+## Analysis
+
+### How did the population of Kenya change over time?
+
+We will make a graphic that plots population data on the y axis and time on the x axis in order to provide an answer to this question. But first, we must search for rows in our `world_pop` dataframe that include information on Kenya. Take note of the code chunk below, where we use pipe operators to construct data pipelines.
+```{r fig.width= 10}
+options(scipen = 999) # removes the scientific notation
+
+world_pop %>% 
+  # filter for rows with Kenya data
+  filter(country_name == "Kenya") %>% 
+  # manipulate variables of interest
+  transmute(year, 
+            population = population/1000000)%>%
+  # create the plot's base layer
+  ggplot(aes(year, population))+
+  geom_line(size = 1)+
+  ylim(0, 60)+
+  theme_economist()+
+  labs(title = "Population of Kenya between 1960 and 2020",
+       y = "Population in Millions",
+       x = "Time in Years",
+       subtitle = "(Data source::datacamp.com)")
+
+# determine population growth rate
+Kenya <- world_pop %>% 
+  filter(country_name == "Kenya") %>% 
+  transmute(year, 
+            population, 
+            population_lag = lag(population),
+            growth_rate = (population - population_lag)/population*100)
+
+head(Kenya)
+
+# calculate average population growth rate 
+Kenya %>% 
+  summarize(average_pop_growth_rate = mean(growth_rate, na.rm = T))
+```
+
+It is evident from the graph above that Kenya's population increased quickly between 1960 and 2020. The population was about 8 million in 1960. Since then, this number has increased to over 50 million until the year 2020. On average, the population grew by 3.100397 percent since 1960.
+
+### How did the population in different regions of the world change over time?
+Let's start by identifying all the regions in the world_pop dataset.
+```{r fig.width=10}
+# print unique regions in the world
+unique(world_pop$region)
+```
+
+We identify 7 regions in the dataset. We are going to analyze each of these regions individually and then compare the findings. 
+
+**Latin America & Caribbean Region**
+```{r}
+# filter for observations where region is Latin America & Caribbean
+Latin_America_Caribbean <- world_pop %>%
+  filter(region == "Latin America & Caribbean")
+
+# aggregate the population 
+summarized_latin <- Latin_America_Caribbean %>%
+  # select variables of interest
+  transmute(year, 
+            # transform population into millions
+            population = population/1000000) %>% 
+  group_by(year) %>% 
+  # aggregate the population for all countries
+  summarize(population =sum(population))
+```
+
+*To avoid repeating the above transformation steps for all the other regions, we can create a function that will automate these steps. We can do so as show in the code chunk below*
+```{r}
+transform <- function(x)
+{
+  x %>% # where x is a dataframe
+    filter(!is.na(population)) %>% # remove rows with NA's
+    transmute(year,  # select variables of interest
+              population = population/1000000) %>% # transform population into millions
+    group_by(year) %>% # aggregate the population for all countries
+    summarize(population =sum(population))
+}
+```
+
+
+```{r fig.width=10}
+# print the first 6 rows of the aggregated data
+head(summarized_latin)
+
+# print the first 6 rows of the aggregated data
+tail(summarized_latin)
+
+# visualize the data
+summarized_latin %>% 
+  ggplot(aes(year, population))+
+  geom_line(size = 1)+
+  ylim(0, 800)+
+  theme_economist()+
+  labs(title = "Population Growth of the Latin America & Caribbean Region between 1960 and 2020",
+       y = "Population in Millions",
+       x = "Time in years",
+       subtitle = "(Data source::datacamp.com)")
+
+# create population growth rate for each year 
+summarized_latin <- summarized_latin %>% 
+  mutate(population_lag = lag(population),
+         growth_rate = (population- population_lag)/population*100)
+
+#print summarized_latin
+summarized_latin
+
+# calculate the average growth rate for all years
+summarized_latin %>% 
+summarize(mean_growth_rate = mean(growth_rate, na.rm= T))
+
+```
+
+The population of the region of Latin America and the Caribbean has been growing at a declining rate, according to the graph above. Since 1960, this region's average growth rate was 1.794714 percent.
+
+**South Asia Region**
+```{r fig.width=10}
+# filter for observations where region is South Asia
+south_asia <- world_pop %>%
+  filter(region == "South Asia")
+
+# we can pass the filtered dataframe into our transform function to get the aggregated data
+summarized_south_asia <- transform(south_asia)
+
+# print the first 6 rows of the aggregated data
+head(summarized_south_asia)
+
+# print the first 6 rows of the aggregated data
+tail(summarized_south_asia)
+
+# visualize the data
+summarized_south_asia %>% 
+  ggplot(aes(year, population))+
+  geom_line(size = 1)+
+  ylim(0, 2000)+
+  theme_economist()+
+  labs(title = "Population Growth of the South Asia Region between 1960 and 2020",
+       y = "Population in Millions",
+       x = "Time in Years",
+       subtitle = "(Data source::datacamp.com)")
+
+# create population growth rate column 
+summarized_south_asia <- summarized_south_asia %>% 
+  mutate(population_lag = lag(population),
+         growth_rate = (population- population_lag)/population*100)
+
+#print summarized_south_asia
+summarized_south_asia
+
+# calculate the average growth rate for all years
+summarized_south_asia %>% 
+summarize(mean_growth_rate = mean(growth_rate, na.rm= T))
+```
+
+The population of the region of South Asia has been growing at a declining rate, according to the graph above. Since 1960, this region's average growth rate was 1.940208 percent.
+
+**Sub-Saharan Africa Region**
+```{r fig.width= 10}
+# filter for observations where region is Sub-Saharan Africa
+sub_saharan_africa <- world_pop %>%
+  filter(region == "Sub-Saharan Africa")
+
+# aggregate the population 
+summarized_sub_saharan_africa <- transform(sub_saharan_africa)
+
+# print the first 6 rows of the aggregated data
+head(summarized_sub_saharan_africa)
+
+
+# visualize the data
+summarized_sub_saharan_africa %>% 
+  ggplot(aes(year, population))+
+  geom_line(size = 1)+
+  ylim(0, 1200)+
+  theme_economist()+
+  labs(title = "Population Growth of the Sub-Saharan Africa Region between 1960 and 2020",
+       y = "Population in Millions",
+       x = "Time in Years",
+       subtitle = "(Data source::datacamp.com)")
+
+# create population growth rate column 
+summarized_sub_saharan_africa <- summarized_sub_saharan_africa %>% 
+  mutate(population_lag = lag(population),
+         growth_rate = (population- population_lag)/population*100)
+
+
+# calculate the average growth rate for all years
+summarized_sub_saharan_africa %>% 
+summarize(mean_growth_rate = mean(growth_rate, na.rm= T))
+```
+
+According to the analysis above, Sub-Saharan Africa's population expanded as well. The population figure in 1960 was about 227 million and  about 1,132 million in 2020.
+Sub-Saharan Africa experienced an average growth rate of 2.641404 percent from 1960 to 2020, which was higher than that of the Latin & Caribbean and South Asia regions.
+
+
+**Europe & Central Asia**
+```{r}
+europe_central_asia <- world_pop %>% 
+  filter(region == "Europe & Central Asia")
+
+# summarized data
+summarized_europe_central_asia <- transform(europe_central_asia)
+
+# print first 6 rows
+head(summarized_europe_central_asia)
+```
+
+
+```{r fig.width=10}
+summarized_europe_central_asia %>% 
+  ggplot(aes(year, population))+
+  geom_line(size = 1)+
+  ylim(600, 1000)+
+  theme_economist()+
+  labs(title = "Population growth of the Europe & Central Asia region betwen 1960 and 2020",
+       subtitle = "(Data source::datacamp.com)",
+       x = "Time in Years",
+       y = "Population in Millions")
+```
+
+```{r}
+# create population growth rate column 
+summarized_europe_central_asia <- summarized_europe_central_asia  %>% 
+  mutate(population_lag = lag(population),
+         growth_rate = (population- population_lag)/population*100)
+
+
+# calculate the average growth rate for all years
+summarized_europe_central_asia %>% 
+summarize(mean_growth_rate = mean(growth_rate, na.rm= T)) %>% 
+  pull(mean_growth_rate)
+```
+

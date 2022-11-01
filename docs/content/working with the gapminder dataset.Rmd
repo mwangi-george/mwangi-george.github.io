@@ -1,0 +1,212 @@
+---
+title: "Analyzing the Gapminder Dataset"
+author: "By: Mwangi George"
+date: "Last edited: `r format(Sys.Date(), '%d %B, %Y')`"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    theme: cerulean
+---
+
+## Introduction
+In this paper, I am going to run SQL queries with the `gapminder` dataset. The goal is to showcase my understanding of the following SQL clauses:
+ 
+ * SELECT
+ * WHERE
+ * ORDER BY 
+ * GROUP BY
+ * ALIASING
+
+### Loading Important Packages and Creating database connection
+```{r}
+# loading packages
+pacman::p_load(tidyverse, gapminder, RSQLite, DBI)
+
+# Create database connection
+lite_connect <- dbConnect(SQLite(), "myProjectDatabase.sqlite")
+
+```
+
+### Loading Gapminder dataset and Uploading it to database
+```{r}
+# load dataset into R environment
+gapminder <- gapminder
+
+# Write the data to the database as a table
+dbWriteTable(conn = lite_connect, 
+             name = "gapminder", 
+             value = gapminder,
+             overwrite = T)
+
+# Check whether the dataset now exists in the database
+dbExistsTable(conn = lite_connect,
+              name = "gapminder")
+
+# select the last 5 rows from the gapminder table
+dbGetQuery(conn = lite_connect,
+           statement = "SELECT * FROM gapminder LIMIT 5")
+```
+
+## SQL Statements
+
+### Write a query to extract only the observations from the year 1957
+```{sql connection = lite_connect}
+SELECT * 
+FROM gapminder
+WHERE year = 1957
+```
+
+### Filter the gapminder data to retrieve only the observation from China in the year 2002
+```{sql connection = lite_connect}
+SELECT * 
+FROM gapminder 
+WHERE country = "China" 
+AND year = 2002
+```
+
+### Sort the gapminder dataset in ascending order of life expectancy (lifeExp)
+```{sql connection = lite_connect}
+SELECT * 
+FROM gapminder 
+ORDER BY lifeExp
+```
+
+### Write a query to retrieve all observations from the gapminder table in descending order of life expectancy (lifeExp)
+```{sql connection = lite_connect}
+SELECT * 
+FROM gapminder 
+ORDER BY lifeExp 
+DESC
+```
+
+### Write a query to extract observations from just the year 1957 sorted in descending order of population (pop)
+```{sql connection = lite_connect}
+SELECT * 
+FROM gapminder 
+WHERE year = 1957 
+ORDER BY pop 
+DESC
+```
+
+
+### Write a query that returns the distinct number of countries in the Americas continent. Name the results `no_of_countries_in_America`
+```{sql connection = lite_connect}
+SELECT  COUNT(DISTINCT country)
+        AS no_of_countries_in_America
+FROM gapminder 
+WHERE continent = "Americas"
+```
+
+### Write a query that returns the all records for the United States for 1997, 2002, and 2007
+```{sql connection = lite_connect}
+SELECT * 
+FROM gapminder 
+WHERE  continent = "Americas"
+AND country = "United States" 
+AND year IN (1997, 2002, 2007)
+```
+
+### Write a query that returns the average life expectancy in the United States as `avg_lifeExp_US` for 2007
+```{sql connection = lite_connect}
+SELECT AVG(lifeExp) 
+       AS avg_lifeExp_US 
+FROM gapminder 
+WHERE continent = "Americas"
+AND country = "United States"
+AND year = 2007
+```
+
+### Write a query to calculate the average life expectancy per continent as `avg_lifeExp` in 2007
+```{sql connection = lite_connect}
+SELECT  continent, 
+        AVG(lifeExp) AS avg_lifeExp
+FROM gapminder
+WHERE year = 2007
+GROUP BY continent
+```
+
+### Write a query to calculate the total population per continent as `total_pop` in 2007. Sort the results in decreasing order of total population
+```{sql connection = lite_connect}
+SELECT  continent,
+        SUM(pop) AS total_pop
+FROM gapminder
+WHERE year = 2007
+GROUP BY continent
+ORDER BY total_pop DESC
+```
+
+### Write a query that returns the country, year, population in millions of people, rounded to two decimal places and life expectancy rounded to one decimal place.
+```{sql connection = lite_connect}
+SELECT  country,
+        year, 
+        ROUND(pop/1000000.0, 2) AS pop_in_millions,
+        ROUND(lifeExp, 1) AS lifeExp
+FROM gapminder
+```
+
+### Write a query that returns the country, year, life expectancy and population in thousands of people for any field with a life expectancy greater than 70
+```{sql connection = lite_connect}
+SELECT  country, 
+        year, 
+        lifeExp,
+        pop/1000.0
+FROM gapminder
+WHERE lifeEXP > 70
+```
+There are 493 records where life expectancy is greater than 70.
+
+### How many records are there if we change lifeExp to greater than 75?
+```{sql connection = lite_connect}
+SELECT  country, 
+        year, 
+        lifeExp,
+        pop/1000.0
+FROM gapminder
+WHERE lifeEXP > 75
+```
+There are 173 records where life expectancy is greater than 75.
+
+### Write a query that returns the country, year, life expectancy and population in thousands of people for any field with a life expectancy greater than 70 and before 1990. How many records are there?
+```{sql connection = lite_connect}
+SELECT  country,
+        year, 
+        lifeExp,
+        pop/1000.0 AS pop_in_millions
+FROM gapminder
+WHERE lifeExp > 70 
+AND year > 1990
+```
+There are 277 records.
+
+### How many records are there if we just look at the year 1952?
+```{sql connection = lite_connect}
+SELECT  country,
+        year, 
+        lifeExp,
+        pop/1000.0 AS pop_in_millions
+FROM gapminder
+WHERE lifeExp > 70 
+AND year = 1952
+
+```
+There are 5 records if we just look at the year 1952.
+
+### How many records are there if we just look at the year 2007?
+```{sql connection = lite_connect}
+SELECT  country,
+        year, 
+        lifeExp,
+        pop/1000.0 AS pop_in_millions
+FROM gapminder
+WHERE lifeExp > 70 
+AND year = 2007
+
+```
+There are 83 records if we just look at the year 2007.
+
+```{r}
+# disconnect database
+dbDisconnect(lite_connect)
+```
+

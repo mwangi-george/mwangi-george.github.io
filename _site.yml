@@ -1,8 +1,17 @@
+name: my-website
+output_dir: docs
 navbar:
-  title: Welcome to George's Profile!
+  title: Welcome to George's Profile
+  type: inverse
   left:
-    - text: Main page that links to files
-    - href: content.html
+  - text: Home
+  - href: content.html
+  - icon: fa-home
+  right:
+  - href: https://github.com/mwangi-george
+  - icon: fa-github
+  - href: https://twitter.com/mwangi__george
+  - icon: fa-twitter
 output:
-  html_document
+  html_document:
     
