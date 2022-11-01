@@ -1,5 +1,6 @@
 ---
-title: "George Ngugi Mwangi"
+title: "George Ngugi"
+date: "Last edited: `r format(Sys.Date(), '%d %B, %Y')`"
 output:
   html_document:
     toc: yes
@@ -45,13 +46,13 @@ text-align: justify}
 </style>
 # Projects
 
-### [Analyzing World Population Data](content/script.html)
+#### [Analyzing World Population Data](content/script.html)
 * This ongoing project looks at population increase in Kenya and other parts of the world between 1960 and 2020. The research also looks into how different income groups impact a country's population and regional trends in population increase.
 
-### [HR Employee Analytics and Behavior Prediction](content/Project_Report.html)
+#### [HR Employee Analytics and Behavior Prediction](content/Project_Report.html)
 * As part of this project, I performed exploratory data analysis on employee data and created a logistic regression model to forecast whether or not an employee would quit the organization using key variables derived from EDA. The model revealed that if the company increased employee satisfaction level by one unit, the probability of an employee leaving reduced by 58.56 percent.
 
-### [Analyzing the gapminder dataset with SQL](content/working-with-the-gapminder-dataset.html)
+#### [Analyzing the gapminder dataset with SQL](content/working-with-the-gapminder-dataset.html)
 * I used sequel to analyze the gapminder dataset from the `gapmider` library for this project. The SQL data manipulation language allowed me to practice data retrieval, aggregation, and analysis.
 
 # Resume
