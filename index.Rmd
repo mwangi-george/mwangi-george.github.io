@@ -1,33 +1,72 @@
 ---
-title: "Main Page"
+title: "George Ngugi Mwangi"
 output:
   html_document:
     toc: yes
     toc_float: yes
-    theme: cerulean
+    theme: darkly
 ---
-![](content/pic1.jpg)
+<style>
+body {
+text-align: justify}
+</style>
 
-### Profile
+![](graphics/me.jpg)
 
-First off, I recently finished my undergraduate studies from Kenyatta University's where I took Economics and Statistics and attained First Class Honors. I learned essential skills in this course, like conducting statistical analysis, making the most optimal decisions, and creating practical economic models. In addition, I am now enrolled in Coursera's online data analyst certification program.
 
-Second, I am proficient in the R programming language, which I use to cleanse, manipulate, and analyze various data sets. I'm able to produce reproducible HTML reports that may be published on a website by using Markdown tools in R programming. The ability to manipulate, access, and update data stored in a variety of relational database management systems, including Microsoft SQL Server and SQLite, is another skill I possess.  Kindly see out the code I've written in these potent programming languages on my GitHub page.
+# About me
 
-Moreover, I am proficient in using spreadsheets and other Microsoft office programs. With the use of these abilities, I can perform analysis that is timely, accurate, and dependable and use it to draw conclusions, make projections, and influence decisions. These abilities make me confident that I can contribute to a data analytics team.
+Hello there! This is George, a passionate scholar of statistics and data analytics. George aspires great things in life, enjoys utilizing data to solve issues in the real world, and finds enthusiasm in lifelong learning, teamwork, and excellence in all endeavors. Interestingly, George believes his future will be remarkable and despises performing the bare minimum.
 
-### Follow the links below to see some of my work
+George has a Bachelor of Science degree in Economics and Statistics from Kenyatta University. He learned valuable skills in this undergraduate program, including how to conduct statistical analysis and describe how people, businesses, and governments behave economically. George is now seeking further data analytics education through the Coursera and DataCamp platforms. He aspires to become a proficient data analyst using tools like the R and SQL programming languages, Power Bi and Tableau viz tools, and Markdown reporting.
 
-* [Analyzing World Population Data](content/script.html)
+# Skills
+<style>
+body {
+text-align: left}
+</style>
+1. **Data Cleaning and Manipulation:** Tidyverse | Microsoft Power Query | Pivot Tables
 
-### Resume
+2. **Parametric Analysis and Hypothesis Testing with R**
 
-* [Resume](content/Profile.pdf)
+3. **Sampling Techniques:** Probability Sampling in R
+
+4. **Data Visualization:** Excel | Ggplot2 | Microsoft Power BI
+
+5. **SQL:** Data Manipulation Language
+
+6. **Collaborating:** GitHub
+
+7. **Reporting:** R Markdown
+
+<style>
+body {
+text-align: justify}
+</style>
+# Projects
+
+### [Analyzing World Population Data](content/script.html)
+* This ongoing project looks at population increase in Kenya and other parts of the world between 1960 and 2020. The research also looks into how different income groups impact a country's population and regional trends in population increase.
+
+### [HR Employee Analytics and Behavior Prediction](content/Project_Report.html)
+* As part of this project, I performed exploratory data analysis on employee data and created a logistic regression model to forecast whether or not an employee would quit the organization using key variables derived from EDA. The model revealed that if the company increased employee satisfaction level by one unit, the probability of an employee leaving reduced by 58.56 percent.
+
+### [Analyzing the gapminder dataset with SQL](content/working-with-the-gapminder-dataset.html)
+* I used sequel to analyze the gapminder dataset from the `gapmider` library for this project. The SQL data manipulation language allowed me to practice data retrieval, aggregation, and analysis.
+
+# Resume
+
+Download [here](content/Profile.pdf)
+
+# Certifications
+![](graphics/foundation.jpg)
+
+![](graphics/ask.jpg)
+
+# My Values
+George firmly believes in and advocates for integrity, hard work, and transparency in all facets of life.
 
 # Contact Me
+[Twitter](https://twitter.com/mwangi__george)       [LinkedIn](https://www.linkedin.com/in/georgemwangikenya)       [Mail](mailto:mwangigeorge648@gmail.com)
 
-[Twitter](https://twitter.com/mwangi__george)
-
-[LinkedIn](https://www.linkedin.com/in/georgemwangikenya)
-
-[Mail](mailto:mwangigeorge648@gmail.com)
+*“Anyone who stops learning is old, whether at twenty or eighty. Anyone who keeps learning stays young.” ― Henry Ford.*
