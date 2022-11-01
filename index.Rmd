@@ -4,7 +4,7 @@ output:
   html_document:
     toc: yes
     toc_float: yes
-    theme: darkly
+    theme: cerulean
 ---
 <style>
 body {
