@@ -17,9 +17,9 @@ text-align: justify}
 
 # About me
 
-Hello there! This is George, a passionate scholar of statistics and data analytics. George aspires great things in life, enjoys utilizing data to solve issues in the real world, and finds enthusiasm in lifelong learning, teamwork, and excellence in all endeavors. Interestingly, George believes his future will be remarkable and despises performing the bare minimum.
+Hello there! This is George, a passionate scholar of statistics and data analytics. George aspires great things in life, enjoys utilizing data to solve issues in the real world, and finds enthusiasm in lifelong learning, teamwork, and excellence in all endeavors.
 
-George has a Bachelor of Science degree in Economics and Statistics from Kenyatta University. He learned valuable skills in this undergraduate program, including how to conduct statistical analysis and describe how people, businesses, and governments behave economically. George is now seeking further data analytics education through the Coursera and DataCamp platforms. He aspires to become a proficient data analyst using tools like the R and SQL programming languages, Power Bi and Tableau viz tools, and Markdown reporting.
+George has a Bachelor of Science degree in Economics and Statistics from Kenyatta University. He learned valuable skills in this undergraduate program, including how to conduct statistical analysis and describe how people, businesses, and governments behave economically. George is now seeking further data science and analytics education through the Coursera and DataCamp platforms. He aspires to become a proficient data professional using tools like the R and SQL programming languages, Power Bi and Tableau viz tools, and Markdown reporting.
 
 # Skills
 <style>
@@ -55,13 +55,14 @@ text-align: justify}
 #### [Analyzing the gapminder dataset with SQL](content/working-with-the-gapminder-dataset.html)
 * I used sequel to analyze the gapminder dataset from the `gapmider` library for this project. The SQL data manipulation language allowed me to practice data retrieval, aggregation, and analysis.
 
-#### [Exploratoy Data Analysis](content/gapminder_EDA_report1.html)
-#### [Exploratoy Data Analysis](content/gapminder_EDA_report2.html)
+# Sample Data Analysis Reports
 #### [Exploratoy Data Analysis](content/gapminder_EDA_report3.html)
+#### [Exploratoy Data Analysis](content/gapminder_EDA_report2.html)
+
 
 # Resume
 
-Download [here](content/Profile.pdf)
+Download [here](content/my-profile.pdf)
 
 # Certifications
 ![](graphics/foundation.jpg)
@@ -72,6 +73,6 @@ Download [here](content/Profile.pdf)
 George firmly believes in and advocates for integrity, hard work, and transparency in all facets of life.
 
 # Contact Me
-[Twitter](https://twitter.com/mwangi__george)       [LinkedIn](https://www.linkedin.com/in/georgemwangikenya)       [Github](https://github.com/mwangi-george)
+[Twitter](https://twitter.com/mwangi__george) \hfill [LinkedIn](https://www.linkedin.com/in/georgemwangikenya)\hfill [Github](https://github.com/mwangi-george)
 
 *“Anyone who stops learning is old, whether at twenty or eighty. Anyone who keeps learning stays young.” ― Henry Ford.*
