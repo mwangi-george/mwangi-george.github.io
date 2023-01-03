@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.3)  3 JAN 2023 13:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.3)  3 JAN 2023 17:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**my-profile.tex
-(./my-profile.tex
+**Ngugi.tex
+(./Ngugi.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2022-12-17> (c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
@@ -568,8 +568,8 @@ File: pgfmoduleparser.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 File: l3backend-pdftex.def 2022-10-26 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count336
 \l__pdf_internal_box=\box64
-) (./my-profile.aux)
-\openout1 = `my-profile.aux'.
+) (./Ngugi.aux)
+\openout1 = `Ngugi.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
 LaTeX Font Info:    ... okay on input line 114.
@@ -627,9 +627,9 @@ Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
 (lastpage)             ! on input line 114.
 Package hyperref Info: Link coloring ON on input line 114.
-(./my-profile.out) (./my-profile.out)
+(./Ngugi.out) (./Ngugi.out)
 \@outlinefile=\write4
-\openout4 = `my-profile.out'.
+\openout4 = `Ngugi.out'.
 
 (c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fmtcount/fc-english.def
 File: fc-english.def 2016/01/12
@@ -683,27 +683,27 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 8.33606pt on input line 129.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 6.25204pt on input line 129.
+
+AED: lastpage setting LastPage
 [1
 
-{c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] 
-AED: lastpage setting LastPage
-[2] (./my-profile.aux)
-Package rerunfilecheck Info: File `my-profile.out' has not changed.
+{c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./Ngugi.aux)
+Package rerunfilecheck Info: File `Ngugi.out' has not changed.
 (rerunfilecheck)             Checksum: EDC6A1A5288F0CCBAAF617689E9ED7C1;534.
  ) 
 Here is how much of TeX's memory you used:
  24129 strings out of 478053
- 449901 string characters out of 5839309
- 1860787 words of memory out of 5000000
- 43787 multiletter control sequences out of 15000+600000
+ 449823 string characters out of 5839309
+ 1864787 words of memory out of 5000000
+ 43788 multiletter control sequences out of 15000+600000
  545871 words of font info for 85 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 115i,12n,118p,1022b,440s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk>{c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/fontawesome/fontawesometwo.enc}<c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fontawesome/FontAwesome.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on my-profile.pdf (2 pages, 104966 bytes).
+ 115i,11n,118p,1017b,438s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk>{c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/fontawesome/fontawesometwo.enc}<c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fontawesome/FontAwesome.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on Ngugi.pdf (1 page, 85943 bytes).
 PDF statistics:
- 121 PDF objects out of 1000 (max. 8388607)
- 81 compressed objects within 1 object stream
- 15 named destinations out of 1000 (max. 500000)
+ 111 PDF objects out of 1000 (max. 8388607)
+ 74 compressed objects within 1 object stream
+ 14 named destinations out of 1000 (max. 500000)
  61 words of extra memory for PDF output out of 10000 (max. 10000000)
 

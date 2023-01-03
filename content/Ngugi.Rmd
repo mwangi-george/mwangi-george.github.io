@@ -1,0 +1,76 @@
+---
+output: stevetemplates::cv
+geometry: margin=.5in
+
+title: "CV"
+author: George Ngugi Mwangi
+
+jobtitle: "Data Analyst"
+address: "Gatundu Town · Kiambu County · Kenya"
+fontawesome: yes
+email: mwangigeorge648@gmail.com
+github: mwangi-george
+phone: "+254 748 177 880"
+web: georgengugi.netlify.app/
+updated: FALSE
+rdateformat: "`r format(Sys.time(), '%d %b %Y')`"
+
+keywords: R Markdown, academic CV, template
+
+fontfamily: mathpazo
+fontfamilyoptions: sc, osf
+fontsize: 11pt
+linkcolor: blue
+urlcolor: blue
+---
+
+# Summary
+
+An extremely committed analyst with a great deal of passion for interpreting, analyzing, and reconciling data from a variety of sources; competent in developing and improving current processes and methods to fulfill both internal and external analysis needs; proficient with the current analytical tools, various presentation software, and possesses strong and effective communication skills crucial in conveying outcomes in analysis and investigations conducted; has a strong commitment to meeting deadlines while maintaining accuracy and the highest standard of work.
+
+# Employment
+
+\begin{itemize}
+ \item \textbullet~ Data Collection Officer at Stats Growth Ltd. \hfill Feb 2022 - March 2022
+\begin{itemize}
+ \item \textbullet~ Duties: Conducted opinion polls, analyzed data and presented Survey Results
+\end{itemize}
+ \item \textbullet~ Enumerator at Kenya National Bureau of Statistics \hfill August 2019
+\begin{itemize}
+ \item \textbullet~ Duties: Conducted interviews and collected demographic data.
+\end{itemize}
+\end{itemize}
+
+# Education
+
+\begin{itemize}
+ \item \textbullet~ B.Sc. Economics and Statistics, Kenyatta University (First Class Honours) \hfill 2018 - 2022
+ \item \textbullet~ Google Data Analytics Professional Certificate, Coursera \hfill 2022 - Present
+ \item \textbullet~ Kenya Certificate of Secondary Education, Ituru High School (Grade B+) \hfill 2014 - 2017
+\end{itemize}
+
+# Skills
+
+\begin{itemize}
+ \item \textbullet~ Data Cleaning and Manipulation (R and SQL Programming Languages)
+ \item \textbullet~ Data Visualization (Excel, Ggplot2 and Shiny Apps)
+ \item \textbullet~ Creating visually appealing reports using formatting and layout options in R Markdown and LaTeX
+\end{itemize}
+
+
+# Certifications
+
+\begin{itemize}
+ \item \textbullet~ Foundations Data (Part of Google Data Analytics Professional Certificate)
+ \item \textbullet~ Statement of Accomplishment (Data Visualization with ggplot2)
+\end{itemize}
+
+# Referees
+
+**Mr Samuel Githae Kinyua** \hspace{\stretch{1}} **Timothy Kamau Njicha**
+
+Economic Analyst at National Treasury \hspace{\stretch{1}} Teacher - Ndundu Secondary School
+
+Tel: +254 720 108 804 \hspace{\stretch{1}} Tel: +254 720 930 767
+
+Email: *kinyua.samuel@ku.ac.ke* \hspace{\stretch{1}} Email: *timothynjicha@gmail.com*

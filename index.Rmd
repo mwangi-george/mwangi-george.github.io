@@ -23,7 +23,7 @@ George has a Bachelor of Science degree in Economics and Statistics from Kenyatt
 body {
 text-align: left}
 </style>
-1. **Data Cleaning and Manipulation:** Tidyverse | Microsoft Power Query | Pivot Tables
+1. **Data Cleaning and Manipulation:** Tidyverse Framework | Microsoft Power Query | Pivot Tables
 
 2. **Parametric Analysis and Hypothesis Testing with R**
 
@@ -61,7 +61,7 @@ text-align: justify}
 
 ## Resume
 
-Download [here](content/my-profile.pdf)
+Download [here](content/Ngugi.pdf)
 
 ## Certifications
 ![](graphics/foundation.jpg)
