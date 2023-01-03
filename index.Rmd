@@ -55,7 +55,10 @@ text-align: justify}
 #### [Analyzing the gapminder dataset with SQL](content/working-with-the-gapminder-dataset.html)
 * I used sequel to analyze the gapminder dataset from the `gapmider` library for this project. The SQL data manipulation language allowed me to practice data retrieval, aggregation, and analysis.
 
+<<<<<<< HEAD
 # Sample Data Analysis Reports
+=======
+>>>>>>> 27aa04ad07cf108f260960cfa5e4123c5a08e85f
 #### [Exploratoy Data Analysis](content/gapminder_EDA_report3.html)
 #### [Exploratoy Data Analysis](content/gapminder_EDA_report2.html)
 
