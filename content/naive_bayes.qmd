@@ -1,0 +1,245 @@
+---
+title: "Naive Bayes Classifier Implementation Project"
+description: A supervised machine learning classification project
+date: last-modified
+author: 
+  - name: Mwangi George
+    url: https://twitter.com/mwangi__george
+    affiliation: College of Economics and Business, Kenyatta University
+    affiliation-url: https://github.com/mwangi-george
+title-block-banner: true
+format: 
+  html: 
+    toc: true
+    number-sections: true
+    df-print: paged
+editor: visual
+---
+
+## Introduction to Naive Bayes Algorithm
+
+The Naive Bayes Classifier is a powerful Machine Learning tool used for supervised classification tasks. It is based on the Bayes Theorem, which states that the probability of an event occurrence is based on prior knowledge of conditions that might be related to the event.
+
+The algorithm is mainly used for text classification that includes high-dimensional training dataset. Additionally, Naive Bayes classifier is a probabilistic classifier which means it predicts based on the probability of an object.
+
+The Naive Bayes algorithm is comprised of two words: *Naive* and *Bayes*, which can be described as follows:
+
+-   **Naive**: It is called Naive because it assumes that the occurrence of a certain feature is independent of the occurrence of other features. Each feature individually contributes to identifying the target outcome without depending on each other.
+
+-   **Bayes**: It is called Bayes because it depends on the principle of Bayes' theorem
+
+## Bayes' Theorem/Law/Rule
+
+Bayes' theorem is used to determine the probability of a hypothesis with prior knowledge. It depends on the **Conditional Probability** formula given below
+
+P(A\|B) = P(B\|A) \* P(A) / P(B)
+
+::: callout-note
+Even though the Naive Bayes classifier is one of the fast and easy machine learning algorithms which performs well in multi-class predictions, the classifier has one major limitation; it assumes all features in a dataset are independent or unrelated, so it cannot learn the relationship between features.
+:::
+
+In this project, we will be using the Naive Bayes Classifier to classify customer purchases using the R programming language.
+
+**Objective**
+
+The objective of this project is to predict whether a customer will purchase an iPhone or not, using the customer's gender, age and salary as input variables. The dataset used for the project will consist of customer records indicating whether the customer has purchased an iPhone or not. We will use the Naive Bayes Classifier algorithm to construct a classification model to make accurate predictions.
+
+::: callout-tip
+### Data source
+
+[The dataset for this project can be found at this link](https://raw.githubusercontent.com/omairaasim/machinelearning/master/project14naivebayes/iphonepurchaserecords.csv.)
+:::
+
+## Preparation
+
+First, we will need to the following preliminary tasks before fitting the Naive Bayes Classifier
+
+-   Load necessary packages
+
+-   Read in the data
+
+-   Perform data pre-processing
+
+```{r}
+# load libraries
+pacman::p_load(
+  tidyverse, naivebayes, caret
+)
+
+# read in the data
+purchases <- read_csv(
+  file = "https://raw.githubusercontent.com/omairaasim/machine_learning/master/project_14_naive_bayes/iphone_purchase_records.csv", 
+  show_col_types = FALSE
+  ) %>% 
+  # clean variable names
+  janitor::clean_names()
+
+# print first 6 rows 
+head(purchases)
+
+# run summary statistics for numeric variables only
+purchases %>% 
+  select_if(is.numeric) %>% 
+  summary()
+```
+
+We should prepare our data before using the Naive Bayes Classifier. This is because numeric properties like age and salary are difficult for Naive Bayes to use as-is without knowing more about the properties of the data.
+
+::: callout-important
+Naive Bayes is a classifier and will therefore perform better with categorical data. Although numeric data will also suffice, it assumes all numeric data are normally distributed which is unlikely in real world data.
+:::
+
+We can utilize the binning technique to create categories from the numeric data by grouping a range of values into meaningful bins.
+
+For the given ages ranging from 18 to 60, we can create the following hypothetical categories:
+
+-   Young (18-30)
+
+-   Adult (31-45)
+
+-   Senior (46-60)
+
+Using the USA income groups, we can categorize the given salaries ranging from 15,000 to 150,000 USD as follows:
+
+-   Lower Income (15,000-34,999 USD)
+
+-   Middle Income (35,000-74,999 USD)
+
+-   Upper Income (75,000-150,000 USD)
+
+For the `purchase_iphone` variable, we can convert 0's to False and 1's to True
+
+```{r}
+# grouping
+model_data <- purchases %>% 
+  mutate(
+    # categorize age into above mentioned age brackets
+    age = if_else(
+      between(age, 18, 30), "Young",
+        if_else(
+          between(age, 31, 45), "Adult", 
+          "Elderly"
+          )
+      ),
+    # categorize salary into above mentioned salary brackets
+    salary = if_else(
+      between(salary, 15000, 34999), "Lower Income", 
+        if_else(
+          between(salary, 35000, 74999), "Middle Income", 
+          "Upper Income"
+          )
+      ),
+    # categorize outcome variable into above mentioned outcomes
+    purchase_iphone = if_else(
+      purchase_iphone == 0, "False", "True"
+    )
+  ) %>%
+  # change all variables into factor variables 
+  mutate_all(factor)
+
+# print first 6 rows
+head(model_data)
+```
+
+## Data Splicing
+
+For splitting the data into training and testing - We will use 20% of dataset as test sample and 80% as training sample.
+
+::: callout-tip
+There is no specific rule that we MUST split the data in this or that proportion. Only thing we need to consider is to make sure the ML model will have sufficient datapoints in the training data to learn from.
+:::
+
+```{r}
+# create a row id for every row in the dataset
+model_data <- model_data %>% rowid_to_column()
+
+# set seed for reproducibility
+set.seed(723)
+
+# create training data
+training_data <- model_data %>% slice_sample(prop = 0.8)
+
+# create testing data 
+testing_data <- model_data %>% anti_join(training_data, by = "rowid")
+
+```
+
+## Fit Naive Bayes Classifier
+
+To fit this model, let's use the `naive_bayes()` function from the *naivebayes* package.
+
+```{r}
+# train model using R's formula interface
+naive_model <- naive_bayes(
+    purchase_iphone ~ gender + age + salary, data = model_data, laplace = 1
+  )
+
+# print model results
+naive_model
+```
+
+::: callout-note
+The laplace parameter in the `naive_bayes` model removes any joint probability of zero
+:::
+
+The out above shows the overall probabilities as well as conditional probabilities for each feature and outcome combination. The overall probabilities show that there is a *35.75%* chance that people will purchase an Iphone. Additionally the results shows that there is a *61.64%* chance that someone in the upper Income group will purchase an Iphone.
+
+## Making Predictions
+
+Now that we train our model, we can use the `testing_data` to evaluate the performance and progress of our algorithms' training and adjust or optimize it for improved results. We do this by calling the `predict()` function, passing the model and the testing_data in the `newdata` parameter.
+
+::: callout-important
+R computes the posterior probabilities if the `type` argument is set to "prob" in the predict function
+:::
+
+```{r}
+# make predictions
+predicted_probs <- predict(
+  # utilize the trained model
+  object = naive_model, 
+  # deselect the rowid and purchase_iphone columns in the testing data 
+  newdata = testing_data %>% select(-c(rowid, purchase_iphone)),
+  # only calculate posterior probabilities
+  type = "prob"
+)
+
+# pint first 6 rows of the outcomes 
+as_tibble(head(predicted_probs))
+```
+
+## Performance Evaluation
+
+From the output above, we the predictions made by our trained model for each observations in the testing data. Let's now evaluate the performance of our model
+
+```{r}
+# set actual outcomes in the testing data
+actual_outcomes <- testing_data$purchase_iphone
+
+# calculate the predicted outcomes
+predicted_outcomes <- predict(
+  # utilize the trained model
+  object = naive_model, 
+  # deselect the rowid and purchase_iphone columns in the testing data 
+  newdata = testing_data %>% select(-c(rowid, purchase_iphone))
+  )
+
+# calculate model accuracy using mean function
+mean(actual_outcomes == predicted_outcomes)
+
+# create confusion matrix and model statistics
+confusionMatrix(
+  table(actual_outcomes, predicted_outcomes)
+  # put the results in tidy format
+  ) %>%
+  broom::tidy() %>% 
+  # select the first row only
+  slice_head()
+```
+
+After running the Naive Bayes classifier and evaluating its accuracy using 20% of the data, we see that the model has an accuracy of 73.75%.
+
+## Conclusion
+
+Although the accuracy of the model is satisfactory, there are some ways in which the accuracy of the model can be further improved. These include optimizing the parameters of the model, pre-processing the data for better performance, and using different techniques such as decision trees and random forests for better results. Additionally, collecting more data and training the model with it can also help to improve the accuracy of the model. In conclusion, though the current model is satisfactory, it is possible to further improve the model's accuracy with the strategies mentioned above.
+
+Written by [George Mwangi](https://twitter.com/mwangi__george)

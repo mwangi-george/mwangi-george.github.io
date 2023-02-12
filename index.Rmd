@@ -31,6 +31,8 @@ text-align: left}
 
 4. **Data Visualization:** Excel | Ggplot2 | Microsoft Power BI
 
+5. **Text Analysis with tidytext package in R**
+
 5. **SQL:** Data Manipulation Language
 
 6. **Collaborating:** GitHub
@@ -42,6 +44,9 @@ body {
 text-align: justify}
 </style>
 ## Projects
+
+#### [Naive Bayes Classification of Customer Purchasing Behavior](content/naive_bayes.html)
+* In this project, the aim is to predict whether a customer will purchase an iPhone or not using the customer's demographic information such as gender, age, and salary as input variables. The project was implemented using the Naive Bayes classifier in the R programming environment.
 
 #### [Analyzing World Population Data](content/script.html)
 * This ongoing project looks at population increase in Kenya and other parts of the world between 1960 and 2020. The research also looks into how different income groups impact a country's population and regional trends in population increase.

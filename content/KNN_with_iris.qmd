@@ -1,0 +1,229 @@
+---
+title: "KNN Implementation with Iris Dataset"
+description: A supervised machine learning classification project
+date: last-modified
+author: 
+  - name: Mwangi George
+    url: https://twitter.com/mwangi__george
+    affiliation: College of Economics and Business, Kenyatta University
+    affiliation-url: https://github.com/mwangi-george
+title-block-banner: true
+format: 
+  html: 
+    toc: true
+    number-sections: true
+    df-print: paged
+editor: visual
+---
+
+# Introduction
+
+K - Nearest Neighbor is a supervised machine learning algorithm that classifies a new data point into the target class depending on the features of the neighboring data points. The objective of this paper is to demonstrate how the algorithm works using the R programming language. We will use the famous Iris dataset to run the algorithm.
+
+## Data Preparation
+
+We need to do a few tasks first before running the KNN algorithm
+
+1.  Load necessary libraries
+2.  Read the data
+3.  Perform necessary wrangling tasks
+4.  Normalize the data
+
+```{r}
+# load important packages
+pacman::p_load(tidyverse, class, janitor, viridis, caret)
+
+
+# read data
+data("iris")
+
+# view first 6 rows
+head(iris)
+
+# change column names into more readable names
+iris <- iris %>% 
+  clean_names()
+
+# check names 
+head(iris)
+```
+
+> Note that the variable `species` is our target variable.
+
+```{r}
+# define a min-max normalize() function
+# This function rescales a vector x such that its minimum value is zero and its maximum
+# value is one; It does this by subtracting the minimum value from each value of x and
+# dividing by the range of values of x.
+
+normalize <- function(x){
+  return((x - min(x)) / (max(x) - min(x)))
+}
+
+# apply normalization to the first 4 columns 
+iris[, 1:4] <- normalize(iris[, 1:4])
+
+head(iris)
+```
+
+## Data Splicing
+
+We need to split the data into training and testing sets. We will use the training set to train the KNN algorithm and testing set to test the performance of the model. Lets use 80% of the data for training and the rest for testing.
+
+```{r}
+# create a row id for each row
+iris <- iris %>% 
+  rowid_to_column()
+
+# set seed for reproducible sampling 
+set.seed(13745)
+
+# split the data into training and testing sets
+# apply the 80/20 splitting rule
+training_set <- iris %>% 
+  slice_sample(prop = 0.8)
+
+# testing set
+testing_set <- iris %>% 
+  anti_join(training_set, by = "rowid")
+```
+
+## Label creation and k value
+
+::: column-margin
+*k in general should be an odd number since the algorithm might confuse even number of classes*.
+:::
+
+```{r}
+# Assign row labels
+species_type <- training_set$species
+
+# Assign k to the rounded square root of the no. of observations in the training set
+k_value <- round(sqrt(nrow(training_set)))
+
+# print k_value
+k_value
+```
+
+# Model fitting
+
+The `knn()` function from the **class** package is used to run the KNN algorithm.
+
+```{r}
+predictions <- knn(
+  # set train to training_set without rowid and species categories
+  train = training_set %>% select(-c(rowid, species)),
+  # set test to testing_set without rowid and species categories
+  test = testing_set %>% select(-c(rowid, species)),
+  # set class to training_set labels
+  cl = species_type,
+  # use the earlier define k_value as k
+  k = k_value
+)
+
+head(predictions)
+```
+
+# Plotting Values
+
+Lets add the predictions to our testing_set as follows
+
+```{r}
+
+# define plotting data
+plotting_data <- testing_set %>% 
+  # rename species variable to actual_species
+  rename(actual_species = species) %>% 
+  # add knn predictions as a variable as predicted_species
+  mutate(predicted_species = predictions)
+```
+
+we can utilize a scatter plot to visualize the relationship between sepal length and sepal width as follows
+
+```{r}
+
+# make a scatter plot of sepal length vs sepal width
+plotting_data %>% 
+  ggplot(aes(
+    sepal_length, 
+    sepal_width,
+    color = predicted_species,
+    fill = predicted_species)
+    )+
+  geom_point(size = 4, show.legend = F)+
+  geom_text(
+    aes(label = actual_species, hjust = .5, vjust = 1.5)
+    ) +
+  labs(
+    x = "Sepal Length",
+    y = "Sepal width",
+    title = "Sepal Length versus Sepal Width",
+    subtitle = "KNN implementation with Iris Dataset",
+    caption = "Data Source: datasets package"
+  )+
+  scale_color_viridis(discrete = TRUE, option = "turbo")+
+  scale_fill_viridis(discrete = TRUE)+
+  theme(
+    legend.position = "none",
+    plot.background = element_rect(fill = "gray90"),
+    panel.background = element_rect(fill = "gray95"),
+    plot.title = element_text(hjust = 0.5),
+    plot.caption = element_text(size = 7),
+    plot.subtitle = element_text(size = 7)
+  )
+```
+
+::: callout-warning
+Note that some data points have been incorrectly classified as type virginica instead of versicolor.
+:::
+
+We can also visualize the relationship between the petal length and petal width as follows
+
+```{r}
+# make a scatter plot of sepal length vs sepal width
+plotting_data %>% 
+  ggplot(aes(
+    petal_length, 
+    petal_width,
+    color = predicted_species,
+    fill = predicted_species)
+    )+
+  geom_point(size = 4, show.legend = F)+
+  geom_text(
+    aes(label = actual_species, hjust = .5, vjust = 1.5)
+    ) +
+  labs(
+    x = "Petal Length",
+    y = "Petal width",
+    title = "Petal Length versus Petal Width",
+    subtitle = "KNN implementation with Iris Dataset",
+    caption = "Data Source: datasets package"
+  )+
+  scale_color_viridis(discrete = TRUE, option = "turbo")+
+  scale_fill_viridis(discrete = TRUE)+
+  theme(
+    legend.position = "none",
+    plot.background = element_rect(fill = "gray90"),
+    panel.background = element_rect(fill = "gray95"),
+    plot.title = element_text(hjust = 0.5),
+    plot.caption = element_text(size = 7),
+    plot.subtitle = element_text(size = 7)
+  )
+```
+
+In this case, the algorithm does well in classifying each data point to the target class.
+
+# Model Accuracy
+
+After building the model, it is time to evaluate its accuracy. We will use the `confusionMatrix()` function from the *caret* package to generate the confusion matrix and calculate statistics.
+
+```{r}
+# generate confusion matrix and model statistics 
+confusionMatrix(table(predictions, testing_set$species))
+
+# put the results into tidy format
+confusionMatrix(table(predictions, testing_set$species)) %>% 
+  broom::tidy()
+```
+
+So, from the output, we can see that our model predicts the outcome with an accuracy of 86.67% which is good since we worked with a small data set. A point to remember is that the more data (optimal data) we feed the machine, the more efficient the model will be.

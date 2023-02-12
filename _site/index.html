@@ -13,7 +13,7 @@
 
 <title>index.knit</title>
 
-<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
@@ -180,8 +180,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -189,16 +189,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -329,6 +322,8 @@ R</strong></p></li>
 R</p></li>
 <li><p><strong>Data Visualization:</strong> Excel | Ggplot2 | Microsoft
 Power BI</p></li>
+<li><p><strong>Text Analysis with tidytext package in
+R</strong></p></li>
 <li><p><strong>SQL:</strong> Data Manipulation Language</p></li>
 <li><p><strong>Collaborating:</strong> GitHub</p></li>
 <li><p><strong>Reporting:</strong> R Markdown</p></li>
@@ -340,6 +335,18 @@ text-align: justify}
 </div>
 <div id="projects" class="section level2">
 <h2>Projects</h2>
+<div id="naive-bayes-classification-of-customer-purchasing-behavior"
+class="section level4">
+<h4><a href="content/naive_bayes.html">Naive Bayes Classification of
+Customer Purchasing Behavior</a></h4>
+<ul>
+<li>In this project, the aim is to predict whether a customer will
+purchase an iPhone or not using the customer’s demographic information
+such as gender, age, and salary as input variables. The project was
+implemented using the Naive Bayes classifier in the R programming
+environment.</li>
+</ul>
+</div>
 <div id="analyzing-world-population-data" class="section level4">
 <h4><a href="content/script.html">Analyzing World Population
 Data</a></h4>
