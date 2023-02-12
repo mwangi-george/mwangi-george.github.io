@@ -1,5 +1,5 @@
 ---
-title: "KNN Implementation with Iris Dataset"
+title: "K-Nearest Neighbor Classification of Iris Species"
 description: A supervised machine learning classification project
 date: last-modified
 author: 

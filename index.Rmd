@@ -48,6 +48,9 @@ text-align: justify}
 #### [Naive Bayes Classification of Customer Purchasing Behavior](content/naive_bayes.html)
 * In this project, the aim is to predict whether a customer will purchase an iPhone or not using the customer's demographic information such as gender, age, and salary as input variables. The project was implemented using the Naive Bayes classifier in the R programming environment.
 
+#### [K-Nearest Neighbor Classification of Iris Species](content/KNN_with_iris.html)
+* In this project, the aim was to implement the K-Nearest Neighbor (KNN) classifier to classify iris species based on their sepal length, sepal width, petal length, and petal width. The iris dataset was used as the source of the data for the project.
+
 #### [Analyzing World Population Data](content/script.html)
 * This ongoing project looks at population increase in Kenya and other parts of the world between 1960 and 2020. The research also looks into how different income groups impact a country's population and regional trends in population increase.
 
@@ -60,13 +63,13 @@ text-align: justify}
 
 ## Sample Data Analysis Reports
 
-#### [EDA Report of the Gapminder Dataset](content/gapminder_EDA_report3.html)
-#### [Data Profiling Report of the Gapminder Dataset](content/gapminder_EDA_report2.html)
+* **[EDA Report of the Gapminder Dataset](content/gapminder_EDA_report3.html)**
+* **[Data Profiling Report of the Gapminder Dataset](content/gapminder_EDA_report2.html)**
 
 
 ## Resume
 
-Download [here](content/Ngugi.pdf)
+Download [here](content/Resume_George.pdf)
 
 ## Certifications
 ![](graphics/foundation.jpg)
