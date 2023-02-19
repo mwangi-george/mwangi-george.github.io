@@ -45,6 +45,9 @@ text-align: justify}
 </style>
 ## Projects
 
+#### [Analysing Sales Product and Sales Data](content/products_trends_report.html)
+* The aim of this project is to analyze the sales data of REC Corp LTD. and provide valuable insights into their business. Our analysis will help the company make informed decisions about their products and improve their overall performance.
+
 #### [Naive Bayes Classification of Customer Purchasing Behavior](content/naive_bayes.html)
 * In this project, the aim is to predict whether a customer will purchase an iPhone or not using the customer's demographic information such as gender, age, and salary as input variables. The project was implemented using the Naive Bayes classifier in the R programming environment.
 
