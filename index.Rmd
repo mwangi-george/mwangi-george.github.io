@@ -68,7 +68,7 @@ text-align: justify}
 
 * **[EDA Report of the Gapminder Dataset](content/gapminder_EDA_report3.html)**
 * **[Data Profiling Report of the Gapminder Dataset](content/gapminder_EDA_report2.html)**
-
+* **[Time Series and forecasting](content/modeltime_intro_mattDancho.html)**
 
 ## Resume
 
