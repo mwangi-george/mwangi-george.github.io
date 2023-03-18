@@ -71,6 +71,7 @@ text-align: justify}
 * **[Time Series and forecasting](content/modeltime_intro_mattDancho.html)**
 * **[Forecasting App](content/forecast_plots.html/index.html)**
 * **[Time Series Plots](content/selected_10_ts.html/index.html)**
+
 ## Resume
 
 Download [here](content/Resume_George.pdf)
