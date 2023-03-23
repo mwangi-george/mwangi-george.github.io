@@ -71,7 +71,7 @@ text-align: justify}
 * **[Time Series and forecasting](content/modeltime_intro_mattDancho.html)**
 * **[Forecasting App](content/forecast_plots.html/index.html)**
 * **[Time Series Plots](content/selected_10_ts.html/index.html)**
-* **[Initial Visualization](content/initial_viz.html/index.html)**
+* **[Initial Visualization](content/initial_viz/index.html)**
 
 ## Resume
 
