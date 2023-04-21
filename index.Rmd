@@ -94,6 +94,7 @@ text-align: justify}
 -   [**Time Series Plots**](content/selected_10_ts.html/index.html)
 -   [**Initial Plots**](content/initial_viz.html/index.html)
 -   [**Contra**](content/final_model/index.html)
+-   [**AI**](content/nakuru_service_data_prep.html)
 
 ## Resume:
 
